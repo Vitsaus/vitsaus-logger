@@ -19,8 +19,8 @@
     this.logs = {};
     this.filteredLevels = [];
     this.filteredCategories = [];
-    this.visibleLevels = [];
-    this.visibleCategories = [];
+    this.visibleLevels = [1];
+    this.visibleCategories = ['default'];
     this.defaultLevel = 1;
     this.defaultCategory = 'default';
     this.enabled = true;
@@ -74,19 +74,19 @@
 
     this.messageCount++;
 
+    if (this.visibleLevels.indexOf(level) === -1) {
+      return;
+    }
+
+    if (this.visibleCategories.indexOf(category) === -1) {
+      return;
+    }
+
     if (this.filteredLevels.indexOf(level) > -1) {
       return;
     }
 
     if (this.filteredCategories.indexOf(category) > -1) {
-      return;
-    }
-
-    if (this.visibleCategories.length > 0 && this.visibleCategories.indexOf(category) === -1) {
-      return;
-    }
-
-    if (this.visibleLevels.length > 0 && this.visibleLevels.indexOf(level) === -1) {
       return;
     }
 
