@@ -21,7 +21,7 @@
     this.filteredCategories = [];
     this.loggers = [{
       name: 'default',
-      fn: function(message, category, level) {
+      fn: function(message, level, category) {
         console.log(level + ' :: ' + category + ' :: ' + JSON.stringify(message));
       }
     }];
@@ -40,7 +40,7 @@
     }
   }
 
-  Logger.prototype.log = function(message, category, level) {
+  Logger.prototype.log = function(message, level, category) {
 
     if (!category) {
       category = 'default';
@@ -75,7 +75,7 @@
     var i = 0;
 
     for (; i < this.loggers.length; i++) {
-      this.loggers[i].fn(message, category, level);
+      this.loggers[i].fn(message, level, category);
     }
 
   }

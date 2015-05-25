@@ -22,7 +22,7 @@ describe('logger', function() {
 
     var counter = 0;
 
-    logger.addLogger('test', function(message, category, level) {
+    logger.addLogger('test', function(message, level, category) {
       assert.equal('hello world', message);
       assert.equal('default', category);
       assert.equal(1, level);
@@ -49,8 +49,8 @@ describe('logger', function() {
       counter++;
     });
 
-    logger.log('a', 'alfa', 1);
-    logger.log('a', 'beta', 1);
+    logger.log('a', 1, 'alfa');
+    logger.log('a', 1, 'beta');
 
     assert.equal(1, counter);
 
@@ -70,9 +70,9 @@ describe('logger', function() {
       counter++;
     });
 
-    logger.log('a', 'alfa', 1);
-    logger.log('a', 'alfa', 1);
-    logger.log('a', 'alfa', 2);
+    logger.log('a', 1);
+    logger.log('a', 1);
+    logger.log('a', 2);
 
     assert.equal(1, counter);
 
