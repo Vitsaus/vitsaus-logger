@@ -34,10 +34,21 @@
       if (options.filteredCategories) {
         this.filteredCategories = options.filteredCategories;
       }
+      if (options.enabled) {
+        this.enabled = options.enabled;
+      }
     }
   }
 
-  Logger.prototype.log = function(level, category, message) {
+  Logger.prototype.log = function(message, category, level) {
+
+    if (!category) {
+      category = 'default';
+    }
+
+    if (!level) {
+      level = 1;
+    }
 
     if (!this.logs.hasOwnProperty(category)) {
         this.logs[category] = [];
@@ -64,7 +75,7 @@
     var i = 0;
 
     for (; i < this.loggers.length; i++) {
-      this.loggers[i].fn(level, category, message);
+      this.loggers[i].fn(message, category, level);
     }
 
   }

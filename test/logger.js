@@ -8,7 +8,7 @@ describe('logger', function() {
     var logger = new Logger();
     logger.removeLogger('default');
 
-    logger.log(1, 'test', 'hello world!');
+    logger.log('hello world!');
 
     assert.equal(1, logger.messageCount);
 
@@ -20,13 +20,18 @@ describe('logger', function() {
 
     logger.removeLogger('default');
 
-    logger.addLogger('custom', function(level, category, message) {
+    var counter = 0;
+
+    logger.addLogger('test', function(message, category, level) {
+      assert.equal('hello world', message);
+      assert.equal('default', category);
       assert.equal(1, level);
-      assert.equal('category', category);
-      assert.equal('message', message);
+      counter++;
     });
 
-    logger.log(1, 'category', 'message');
+    logger.log('hello world');
+
+    assert.equal(1, counter);
 
   });
 
@@ -40,12 +45,12 @@ describe('logger', function() {
 
     logger.removeLogger('default');
 
-    logger.addLogger('testing', function(level, category, message) {
+    logger.addLogger('test', function() {
       counter++;
     });
 
-    logger.log(1, 'alfa', 'Hello world');
-    logger.log(1, 'beta', 'Second message');
+    logger.log('a', 'alfa', 1);
+    logger.log('a', 'beta', 1);
 
     assert.equal(1, counter);
 
@@ -61,12 +66,13 @@ describe('logger', function() {
 
     logger.removeLogger('default');
 
-    logger.addLogger('testing', function(level, category, message) {
+    logger.addLogger('test', function() {
       counter++;
     });
 
-    logger.log(1, 'alfa', 'Hello world');
-    logger.log(2, 'beta', 'Second message');
+    logger.log('a', 'alfa', 1);
+    logger.log('a', 'alfa', 1);
+    logger.log('a', 'alfa', 2);
 
     assert.equal(1, counter);
 
