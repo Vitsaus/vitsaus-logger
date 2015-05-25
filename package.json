@@ -1,0 +1,14 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "Simple logger with categories and levels",
+  "main": "index.js",
+  "directories": {
+    "test": "mocha"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Ville Takala <ville.takala@n2.fi>",
+  "license": "ISC"
+}

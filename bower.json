@@ -1,0 +1,17 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "authors": [
+    "Ville Takala <ville.takala@n2.fi>"
+  ],
+  "description": "Simple logger with categories and levels",
+  "main": "src/logger.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
