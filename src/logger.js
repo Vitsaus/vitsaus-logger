@@ -22,7 +22,7 @@
     this.loggers = [{
       name: 'default',
       fn: function(message, category, level) {
-        console.log(category + ' :: ' + level + ' :: ' + JSON.stringify(message));
+        console.log(level + ' :: ' + category + ' :: ' + JSON.stringify(message));
       }
     }];
     this.enabled = true;
