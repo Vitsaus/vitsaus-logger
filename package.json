@@ -1,5 +1,5 @@
 {
-  "name": "logger",
+  "name": "vitsaus-logger",
   "version": "1.0.0",
   "description": "Simple logger with categories and levels",
   "main": "index.js",
