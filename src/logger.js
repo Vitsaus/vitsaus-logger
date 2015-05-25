@@ -21,8 +21,8 @@
     this.filteredCategories = [];
     this.loggers = [{
       name: 'default',
-      fn: function(level, category, message) {
-        console.log(level + ' :: ' + category + ' :: ' + message);
+      fn: function(message, category, level) {
+        console.log(level + ' :: ' + category + ' :: ' + JSON.stringify(message));
       }
     }];
     this.enabled = true;
