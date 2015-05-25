@@ -19,13 +19,18 @@
     this.logs = {};
     this.filteredLevels = [];
     this.filteredCategories = [];
+    this.visibleLevels = [];
+    this.visibleCategories = [];
+    this.defaultLevel = 1;
+    this.defaultCategory = 'default';
+    this.enabled = true;
+
     this.loggers = [{
       name: 'default',
       fn: function(message, level, category) {
         console.log(level + ' :: ' + category + ' :: ' + JSON.stringify(message));
       }
     }];
-    this.enabled = true;
 
     if (options) {
       if (options.filteredLevels) {
@@ -34,20 +39,27 @@
       if (options.filteredCategories) {
         this.filteredCategories = options.filteredCategories;
       }
+      if (options.visibleLevels) {
+        this.visibleLevels = options.visibleLevels;
+      }
+      if (options.visibleCategories) {
+        this.visibleCategories = options.visibleCategories;
+      }
       if (options.enabled) {
         this.enabled = options.enabled;
       }
     }
+
   }
 
   Logger.prototype.log = function(message, level, category) {
 
     if (!category) {
-      category = 'default';
+      category = this.defaultCategory;
     }
 
     if (!level) {
-      level = 1;
+      level = this.defaultLevel;
     }
 
     if (!this.logs.hasOwnProperty(category)) {
@@ -62,11 +74,19 @@
 
     this.messageCount++;
 
-    if (this.filteredLevels && this.filteredLevels.indexOf(level) > -1) {
+    if (this.filteredLevels.indexOf(level) > -1) {
       return;
     }
 
-    if (this.filteredCategories && this.filteredCategories.indexOf(category) > -1) {
+    if (this.filteredCategories.indexOf(category) > -1) {
+      return;
+    }
+
+    if (this.visibleCategories.length > 0 && this.visibleCategories.indexOf(category) === -1) {
+      return;
+    }
+
+    if (this.visibleLevels.length > 0 && this.visibleLevels.indexOf(level) === -1) {
       return;
     }
 
@@ -78,14 +98,6 @@
       this.loggers[i].fn(message, level, category);
     }
 
-  }
-
-  Logger.prototype.setFilteredCategories = function(list) {
-    this.filteredCategories = list;
-  }
-
-  Logger.prototype.setFilteredLevels = function(list) {
-    this.filteredLevels = list;
   }
 
   Logger.prototype.addLogger = function(name, fn) {
